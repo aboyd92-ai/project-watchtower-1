@@ -1,1 +1,274 @@
+/* ===== Global reset & base ===== */
 
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+  background: #0f172a; /* dark slate */
+  color: #0b1120;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* ===== App shell ===== */
+
+.app-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* main content */
+main {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  padding: 2rem 1rem 3rem;
+}
+
+main > section {
+  width: 100%;
+  max-width: 960px;
+  background: #f9fafb;
+  padding: 2rem 2rem 2.5rem;
+  border-radius: 1rem;
+  box-shadow: 0 20px 40px rgba(15, 23, 42, 0.35);
+}
+
+/* ===== Top nav / header ===== */
+
+.top-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+  background: linear-gradient(90deg, #0f172a, #1e293b);
+  color: #f9fafb;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.35);
+}
+
+.logo {
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  font-size: 1.1rem;
+  text-transform: uppercase;
+}
+
+.nav-links {
+  display: flex;
+  gap: 1.25rem;
+  font-size: 0.95rem;
+}
+
+.nav-links a {
+  position: relative;
+  padding-bottom: 0.15rem;
+  opacity: 0.85;
+}
+
+.nav-links a:hover {
+  opacity: 1;
+}
+
+.nav-links a.active::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -0.2rem;
+  width: 100%;
+  height: 2px;
+  background: #fbbf24; /* amber highlight */
+  border-radius: 999px;
+}
+
+/* ===== Typography ===== */
+
+h1 {
+  margin: 0 0 0.75rem;
+  font-size: 1.9rem;
+  color: #0f172a;
+}
+
+p {
+  margin: 0.25rem 0 0.75rem;
+  color: #4b5563;
+}
+
+/* ===== Zone filter ===== */
+
+.zone-filter {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 1rem 0 1.25rem;
+  font-size: 0.95rem;
+}
+
+.zone-filter label {
+  font-weight: 600;
+  color: #111827;
+}
+
+.zone-filter select {
+  padding: 0.35rem 0.6rem;
+  border-radius: 999px;
+  border: 1px solid #cbd5f5;
+  background: #ffffff;
+}
+
+/* ===== Incident feed & cards ===== */
+
+.incident-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  margin-top: 0.75rem;
+}
+
+.alert-card {
+  background: #ffffff;
+  border-radius: 0.75rem;
+  padding: 1rem;
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.12);
+  border-left: 4px solid transparent;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.alert-card header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.alert-card h3 {
+  margin: 0;
+  font-size: 1.05rem;
+  color: #111827;
+}
+
+.zone-tag {
+  padding: 0.15rem 0.6rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  background: #e5e7eb;
+}
+
+/* severity colors */
+.alert-high {
+  border-left-color: #dc2626;
+}
+
+.alert-medium {
+  border-left-color: #ea580c;
+}
+
+.alert-low {
+  border-left-color: #16a34a;
+}
+
+.alert-card p {
+  margin: 0.25rem 0;
+  font-size: 0.9rem;
+}
+
+.alert-card small {
+  margin-top: 0.25rem;
+  color: #6b7280;
+  font-size: 0.75rem;
+}
+
+/* ===== Report form ===== */
+
+.report-form {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  background: #ffffff;
+  padding: 1.25rem 1.5rem;
+  border-radius: 0.75rem;
+  box-shadow: 0 12px 24px rgba(15, 23, 42, 0.14);
+}
+
+.report-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  font-size: 0.9rem;
+  color: #111827;
+  font-weight: 600;
+}
+
+.report-form input,
+.report-form textarea,
+.report-form select {
+  border-radius: 0.4rem;
+  border: 1px solid #cbd5f5;
+  padding: 0.45rem 0.6rem;
+  font: inherit;
+}
+
+.report-form textarea {
+  min-height: 80px;
+  resize: vertical;
+}
+
+.report-form button {
+  margin-top: 0.25rem;
+  align-self: flex-start;
+  background: #0f172a;
+  color: #f9fafb;
+  border: none;
+  border-radius: 999px;
+  padding: 0.5rem 1.4rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  letter-spacing: 0.02em;
+}
+
+.report-form button:hover {
+  background: #111827;
+}
+
+.error {
+  margin: 0;
+  color: #dc2626;
+  font-size: 0.85rem;
+}
+
+/* ===== Footer ===== */
+
+footer {
+  background: #020617;
+  color: #9ca3af;
+  text-align: center;
+  padding: 0.9rem 1rem;
+  font-size: 0.8rem;
+}
+
+/* ===== Responsive tweaks ===== */
+
+@media (max-width: 640px) {
+  .top-nav {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  main > section {
+    padding: 1.25rem 1rem 1.75rem;
+  }
+}

@@ -1,18 +1,22 @@
-import { useState } from "react"
-import { incidents as seedData } from "../data/incidents"
-import IncidentFeed from "../components/IncidentFeed.jsx"
-import ZoneFilter from "../components/ZoneFilter.jsx"
+import { useState } from "react";
+import IncidentFeed from "../components/IncidentFeed.jsx";
+import ZoneFilter from "../components/ZoneFilter.jsx";
 
-export default function Home() {
-    const [selectedZone, setSelectedZone] = useState("All")
+export default function Home({ incidents }) {
+  const [selectedZone, setSelectedZone] = useState("All");
 
-    const filtered = selectedZone === "All"
-        ? seedData
-        : seedData.filter(incident => incident.zone === selectedZone)
-    return (
-        <section>
-            <h1>Welcome to Watchtower</h1>
-            <p>Your trusted platform for reporting and tracking safety incidents in your community.</p>
-        </section>
-    )
+  const filtered = selectedZone === "All"
+    ? incidents
+    : incidents.filter((inc) => inc.zone === selectedZone);
+
+  return (
+    <section>
+      <h1>Recent Incidents</h1>
+      <p>Stay aware of what’s happening in your community.</p>
+
+      <ZoneFilter selectedZone={selectedZone} onChange={setSelectedZone} />
+
+      <IncidentFeed incidents={filtered} />
+    </section>
+  );
 }
