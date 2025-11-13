@@ -1,6 +1,6 @@
 import { Routes, Route } from "react-router-dom";
-import header from "./components/header.jsx";
-import footer from "./components/footer.jsx";
+import Header from "./components/header.jsx";
+import Footer from "./components/footer.jsx";
 import Home from "./pages/Home.jsx";
 import About from "./pages/About.jsx";
 import Report from "./pages/Report.jsx";
