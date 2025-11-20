@@ -1,18 +1,23 @@
-import { useState } from 'react'
-import { Routes, Route } from 'react-router-dom'
-import Header from './components/header.jsx'
-import Footer from './components/footer.jsx'
-import Home from './pages/Home.jsx'
-import Report from './pages/Report.jsx'
-import About from './pages/About.jsx'
-import { incidents as seedData } from './data/incidents.js'
+import { useState } from 'react';
+import { Routes, Route } from 'react-router-dom';
+import Header from './components/header.jsx';
+import Footer from './components/footer.jsx';
+import Home from './pages/Home.jsx';
+import Report from './pages/Report.jsx';
+import About from './pages/About.jsx';
+import { incidents as seedData } from './data/incidents.js';
+import ReportedIncidents from './pages/ReportedIncidents.jsx';
 
 function App() {
-  const [incidents, setIncidents] = useState(seedData)
+  // 👉 1) Sample incidents: used ONLY on Home
+  const sampleIncidents = seedData;
 
+  // 👉 2) User-submitted reports: used ONLY on Report page
+  const [reports, setReports] = useState([]);
+
+  // 👉 3) Handler now updates "reports", NOT sample incidents
   function handleAddIncident(newIncident) {
-    // newest first
-    setIncidents([newIncident, ...incidents])
+    setReports((prev) => [newIncident, ...prev]); // newest first
   }
 
   return (
@@ -20,14 +25,29 @@ function App() {
       <Header />
       <main>
         <Routes>
-          <Route path="/" element={<Home incidents={incidents} />} />
-          <Route path="/report" element={<Report onAddIncident={handleAddIncident} />} />
+          {/* Home gets only the sample incidents */}
+          <Route path="/" element={<Home incidents={sampleIncidents} />} />
+
+          {/* Report page gets handler + list of user reports */}
+          <Route
+            path="/report"
+            element={
+              <Report
+                onAddIncident={handleAddIncident}
+                reports={reports}
+              />
+            }
+          />
+
           <Route path="/about" element={<About />} />
+
+          {/* Reported incidents page */}
+          <Route path="/reported-incidents" element={<ReportedIncidents incidents={sampleIncidents} />} />
         </Routes>
       </main>
       <Footer />
     </div>
-  )
+  );
 }
 
-export default App
+export default App;

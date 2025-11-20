@@ -1,22 +1,10 @@
-import { useState } from "react";
-import IncidentFeed from "../components/IncidentFeed.jsx";
-import ZoneFilter from "../components/ZoneFilter.jsx";
-
-export default function Home({ incidents }) {
-  const [selectedZone, setSelectedZone] = useState("All");
-
-  const filtered = selectedZone === "All"
-    ? incidents
-    : incidents.filter((inc) => inc.zone === selectedZone);
-
+export default function Home() {
   return (
-    <section>
-      <h1>Recent Incidents</h1>
-      <p>Stay aware of what’s happening in your community.</p>
-
-      <ZoneFilter selectedZone={selectedZone} onChange={setSelectedZone} />
-
-      <IncidentFeed incidents={filtered} />
+    <section className="home-landing">
+      <div className="overlay">
+        <h1 className="home-title">WatchTower</h1>
+        <p className="home-tagline">Neighborhood safety at the touch of a button</p>
+      </div>
     </section>
   );
 }

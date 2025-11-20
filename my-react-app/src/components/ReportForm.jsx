@@ -1,69 +1,126 @@
-import { useState } from 'react'
+import { useState } from "react";
 
-export default function ReportForm({ onAdd }) {
-  const [title, setTitle] = useState('')
-  const [description, setDescription] = useState('')
-  const [zone, setZone] = useState('North')
-  const [severity, setSeverity] = useState('low')
-  const [error, setError] = useState('')
+export default function ReportForm({ onAddIncident }) {
+  const [title, setTitle] = useState("");          // what happened
+  const [severity, setSeverity] = useState("Low");
+  const [zone, setZone] = useState("Northside");
+  const [date, setDate] = useState("");
+  const [time, setTime] = useState("");
+  const [details, setDetails] = useState("");      // comment box
+  const [error, setError] = useState("");
 
-  function handleSubmit(e) {
-    e.preventDefault()
-    if (!title.trim() || !description.trim()) {
-      setError('Title and description are required.')
-      return
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (!title.trim()) {
+      setError("Please enter what happened (incident type).");
+      return;
     }
-    setError('')
-    const newIncident = {
-      id: crypto.randomUUID(),
-      title,
-      description,
-      zone,
+
+    // if user doesn’t pick date/time, use current time
+    const incidentTime =
+      date && time
+        ? `${date} ${time}`
+        : new Date().toLocaleString();
+
+    onAddIncident({
+      type: title,
       severity,
-      time: new Date().toISOString().slice(0, 16).replace('T', ' ')
-    }
-    onAdd(newIncident)
-    // reset
-    setTitle('')
-    setDescription('')
-    setZone('North')
-    setSeverity('low')
-  }
+      zone,
+      description: details,
+      time: incidentTime,
+    });
+
+    // reset form
+    setTitle("");
+    setSeverity("Low");
+    setZone("Northside");
+    setDate("");
+    setTime("");
+    setDetails("");
+    setError("");
+  };
 
   return (
     <form className="report-form" onSubmit={handleSubmit}>
-      <label>
-        Title*
-        <input value={title} onChange={(e) => setTitle(e.target.value)} />
-      </label>
+      <h2>Submit a Report</h2>
+      <p className="report-subtext">
+        Please fill out the form below to report a crime incident.
+      </p>
 
       <label>
-        Description*
-        <textarea value={description} onChange={(e) => setDescription(e.target.value)} />
+        Incident / Report title
+        <input
+          type="text"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          placeholder="e.g. Suspicious vehicle, Domestic dispute, Noise complaint"
+        />
       </label>
+
+      <div className="report-row">
+        <label>
+          Severity
+          <select
+            value={severity}
+            onChange={(e) => setSeverity(e.target.value)}
+          >
+            <option>Low</option>
+            <option>Medium</option>
+            <option>High</option>
+          </select>
+        </label>
+
+        <label>
+          Zone / Area
+          <select
+            value={zone}
+            onChange={(e) => setZone(e.target.value)}
+          >
+            <option>Northside</option>
+            <option>Southside</option>
+            <option>Eastside</option>
+            <option>Westside</option>
+            <option>Downtown</option>
+          </select>
+        </label>
+      </div>
+
+      <div className="report-row">
+        <label>
+          Date
+          <input
+            type="date"
+            value={date}
+            onChange={(e) => setDate(e.target.value)}
+          />
+        </label>
+
+        <label>
+          Time
+          <input
+            type="time"
+            value={time}
+            onChange={(e) => setTime(e.target.value)}
+          />
+        </label>
+      </div>
 
       <label>
-        Zone
-        <select value={zone} onChange={(e) => setZone(e.target.value)}>
-          <option>North</option>
-          <option>South</option>
-          <option>East</option>
-          <option>West</option>
-        </select>
+        Additional details (optional)
+        <textarea
+          rows="3"
+          value={details}
+          onChange={(e) => setDetails(e.target.value)}
+          placeholder="Describe what you saw, who was involved, direction of travel, etc."
+        />
       </label>
 
-      <label>
-        Severity
-        <select value={severity} onChange={(e) => setSeverity(e.target.value)}>
-          <option value="low">Low</option>
-          <option value="medium">Medium</option>
-          <option value="high">High</option>
-        </select>
-      </label>
+      {error && <p className="error-text">{error}</p>}
 
-      {error && <p className="error">{error}</p>}
-
-      <button type="submit">Submit Report</button>
+      <button type="submit" className="submit-btn">
+        Submit report
+      </button>
     </form>
-  )
+  );
 }
