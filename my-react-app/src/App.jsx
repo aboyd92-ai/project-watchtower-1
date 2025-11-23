@@ -7,6 +7,7 @@ import Report from './pages/Report.jsx';
 import About from './pages/About.jsx';
 import { incidents as seedData } from './data/incidents.js';
 import ReportedIncidents from './pages/ReportedIncidents.jsx';
+import './App.css';
 
 function App() {
   // 👉 1) Sample incidents: used ONLY on Home
@@ -42,7 +43,7 @@ function App() {
           <Route path="/about" element={<About />} />
 
           {/* Reported incidents page */}
-          <Route path="/reported-incidents" element={<ReportedIncidents incidents={sampleIncidents} />} />
+          <Route path="/reported-incidents" element={<ReportedIncidents incidents={reports} />} />
         </Routes>
       </main>
       <Footer />
