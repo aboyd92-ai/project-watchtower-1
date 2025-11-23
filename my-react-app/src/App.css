@@ -1,1 +1,96 @@
+/* === HOME PAGE VIDEO BACKGROUND  === */
 
+.home-landing {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+
+.home-video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  transform: translate(-50%, -50%);
+  object-fit: cover;       
+ z-index: 1;
+}
+
+/* === OVERLAY TEXT === */
+.home-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 20px;
+  z-index: 2;
+}
+
+.home-title {
+  font-size: 4rem;
+  font-weight: 700;
+  color: #ffffff;
+  text-shadow: 0px 0px 18px rgba(0, 0, 0, 0.9); 
+  margin-bottom: 10px;
+}
+
+.home-tagline {
+  font-size: 1.6rem;
+  font-weight: 400;
+  color: #f0f0f0;
+  opacity: 0.95;
+  text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.6);
+}
+
+/* MOBILE FIXES */
+@media (max-width: 768px) {
+  .home-title {
+    font-size: 2.5rem;
+  }
+
+  .home-tagline {
+    font-size: 1.2rem;
+  }
+}
+
+/* hover effect for nav links */
+.nav-links a:hover {
+    background: rgba(255,255,255,0.08);
+    text-decoration: none;
+}
+
+/* === ABOUT PAGE STYLES === */
+.about-page { 
+  width: 100vw;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding-top: 20px;
+}
+
+.about-image-wrapper {
+  width: 100%;
+  height: 60vh; 
+  overflow: hidden;
+  border-radius: 12px;
+}
+
+.about-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; 
+  display: block;
+}
