@@ -10,13 +10,13 @@ import ReportedIncidents from './pages/ReportedIncidents.jsx';
 import './App.css';
 
 function App() {
-  // 👉 1) Sample incidents: used ONLY on Home
+  
   const sampleIncidents = seedData;
 
   // 👉 2) User-submitted reports: used ONLY on Report page
   const [reports, setReports] = useState([]);
 
-  // 👉 3) Handler now updates "reports", NOT sample incidents
+  
   function handleAddIncident(newIncident) {
     setReports((prev) => [newIncident, ...prev]); // newest first
   }
@@ -26,10 +26,10 @@ function App() {
       <Header />
       <main>
         <Routes>
-          {/* Home gets only the sample incidents */}
+          
           <Route path="/" element={<Home incidents={sampleIncidents} />} />
 
-          {/* Report page gets handler + list of user reports */}
+          
           <Route
             path="/report"
             element={

@@ -94,3 +94,9 @@
   object-fit: cover; 
   display: block;
 }
+
+/* === SUBMIT BUTTON DISABLED STATE on ReportForm === */
+.submit-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
