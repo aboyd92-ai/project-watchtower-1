@@ -1,5 +1,3 @@
-/* ===== Global reset & base ===== */
-
 *,
 *::before,
 *::after {
@@ -10,7 +8,7 @@ body {
   margin: 0;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
     sans-serif;
-  background: #0f172a; /* dark slate */
+  background: #0f172a; 
   color: #0b1120;
 }
 
@@ -19,7 +17,7 @@ a {
   text-decoration: none;
 }
 
-/* ===== App shell ===== */
+
 
 .app-container {
   min-height: 100vh;
@@ -44,7 +42,7 @@ main > section {
   box-shadow: 0 20px 40px rgba(15, 23, 42, 0.35);
 }
 
-/* ===== Top nav / header ===== */
+/* ===== Top nav header ===== */
 
 .top-nav {
   display: flex;
@@ -73,6 +71,9 @@ main > section {
   position: relative;
   padding-bottom: 0.15rem;
   opacity: 0.85;
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
 }
 
 .nav-links a:hover {
@@ -86,11 +87,10 @@ main > section {
   bottom: -0.2rem;
   width: 100%;
   height: 2px;
-  background: #fbbf24; /* amber highlight */
+  background: #fbbf24; 
   border-radius: 999px;
 }
 
-/* ===== Typography ===== */
 
 h1 {
   margin: 0 0 0.75rem;
@@ -134,15 +134,23 @@ p {
   margin-top: 0.75rem;
 }
 
+/* Card base */
 .alert-card {
   background: #ffffff;
   border-radius: 0.75rem;
-  padding: 1rem;
+  padding: 1rem 1.2rem;
   box-shadow: 0 8px 20px rgba(15, 23, 42, 0.12);
   border-left: 4px solid transparent;
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
+  margin-bottom: 1rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.alert-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
 }
 
 .alert-card header {
@@ -158,26 +166,6 @@ p {
   color: #111827;
 }
 
-.zone-tag {
-  padding: 0.15rem 0.6rem;
-  border-radius: 999px;
-  font-size: 0.75rem;
-  background: #e5e7eb;
-}
-
-/* severity colors */
-.alert-high {
-  border-left-color: #dc2626;
-}
-
-.alert-medium {
-  border-left-color: #ea580c;
-}
-
-.alert-low {
-  border-left-color: #16a34a;
-}
-
 .alert-card p {
   margin: 0.25rem 0;
   font-size: 0.9rem;
@@ -186,6 +174,31 @@ p {
 .alert-card small {
   margin-top: 0.25rem;
   color: #6b7280;
+  font-size: 0.75rem;
+}
+
+/* OR – if your JSX uses severity-high / -medium / -low classes instead: */
+
+.severity-high {
+  border-left: 6px solid #e63946;
+  background: rgba(230, 57, 70, 0.05);
+}
+.severity-medium {
+  border-left: 6px solid #ffbf00;
+  background: rgba(255, 191, 0, 0.08);
+}
+.severity-low {
+  border-left: 6px solid #2a9d8f;
+  background: rgba(42, 157, 143, 0.05);
+}
+*/
+
+/* Zone tag */
+.zone-tag {
+  padding: 2px 8px;
+  background: #f3f4f6;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
   font-size: 0.75rem;
 }
 
@@ -259,6 +272,36 @@ footer {
   font-size: 0.8rem;
 }
 
+/* == HAMBURGER BUTTON (MOBILE) == */
+
+.hamburger {
+  display: none; /* hidden on desktop */
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+}
+
+.hamburger span {
+  width: 25px;
+  height: 3px;
+  background: white;
+  transition: all 0.3s ease;
+}
+
+.hamburger.is-open span:nth-child(1) {
+  transform: rotate(45deg) translateY(8px);
+}
+
+.hamburger.is-open span:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger.is-open span:nth-child(3) {
+  transform: rotate(-45deg) translateY(-8px);
+}
+
 /* ===== Responsive tweaks ===== */
 
 @media (max-width: 640px) {
@@ -270,100 +313,11 @@ footer {
 
   main > section {
     padding: 1.25rem 1rem 1.75rem;
-
-}
-}
-/* Card base */
-.alert-card {
-  padding: 1rem 1.2rem;
-  background: #fff;
-  border-radius: 12px;
-  margin-bottom: 1rem;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.15);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
 }
 
-.alert-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 12px 24px rgba(0,0,0,0.2);
-}
-
-/* Color strips */
-.severity-high {
-  border-left: 6px solid #e63946;
-  background: rgba(230, 57, 70, 0.05);
-}
-
-.severity-medium {
-  border-left: 6px solid #ffbf00;
-  background: rgba(255, 191, 0, 0.08);
-}
-
-.severity-low {
-  border-left: 6px solid #2a9d8f;
-  background: rgba(42, 157, 143, 0.05);
-}
-
-/* Header */
-.alert-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-/* Severity pill */
-.severity-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.3rem;
-  padding: 4px 10px;
-  border-radius: 999px;
-  font-size: 0.8rem;
-  font-weight: 600;
-}
-
-.severity-badge.high {
-  background: #e63946;
-  color: #fff;
-}
-
-.severity-badge.medium {
-  background: #ffbf00;
-  color: #111;
-}
-
-.severity-badge.low {
-  background: #2a9d8f;
-  color: #fff;
-}
-
-/* Message text */
-.severity-message {
-  font-size: 0.85rem;
-  color: #555;
-  margin-top: 0.3rem;
-}
-
-/* Footer row */
-.alert-footer {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 0.8rem;
-  color: #666;
-  font-size: 0.78rem;
-}
-
-/* Zone tag */
-.zone-tag {
-  padding: 2px 8px;
-  background: #f3f4f6;
-  border-radius: 8px;
-  border: 1px solid #d1d5db;
-  font-size: 0.75rem;
-}
-/* ===== MOBILE LAYOUT ===== */
+/* MOBILE LAYOUT + HAMBURGER (phones) */
 @media (max-width: 600px) {
-  /* stack header / nav vertically */
   .top-nav {
     flex-direction: column;
     align-items: flex-start;
@@ -385,7 +339,6 @@ footer {
     border-radius: 12px;
   }
 
-  /* alert cards a bit tighter */
   .alert-card {
     padding: 12px 10px;
   }
@@ -394,13 +347,39 @@ footer {
     font-size: 0.95rem;
   }
 
-  .home-hero,
-  .home-hero-video {
+  /* Show hamburger button */
+  .hamburger {
+    display: flex;
+  }
+
+  /* Hide nav links by default */
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: 70px;
+    right: 20px;
+    flex-direction: column;
+    background-color: #1e1e2f;
+    padding: 20px;
+    border-radius: 12px;
+    width: 60%;
+    z-index: 50;
+  }
+
+  .nav-links.nav-open {
+    display: flex;
+  }
+
+  .nav-links a {
+    padding: 10px 0;
+  }
+
+  .home-landing,
+  .home-video {
     min-height: 75vh;
   }
 
-  .home-overlay,
-  .home-video-overlay {
+  .home-overlay {
     padding: 24px 18px;
   }
 
@@ -423,87 +402,8 @@ footer {
     text-align: center;
   }
 }
-.top-nav {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 16px 24px;
-}
 
-/* navigation links (desktop) */
-.nav-links {
-  display: flex;
-  gap: 20px;
-}
-
-.nav-links a {
-  color: white;
-  text-decoration: none;
-  font-weight: 500;
-}
-/* ========== HAMBURGER BUTTON (MOBILE) ========== */
-
-.hamburger {
-  display: none;           /* hidden on desktop */
-  flex-direction: column;
-  gap: 5px;
-  cursor: pointer;
-  background: transparent;
-  border: none;
-}
-
-.hamburger span {
-  width: 25px;
-  height: 3px;
-  background: white;
-  transition: all 0.3s ease;
-}
-
-/* When menu is open, animate it */
-.hamburger.is-open span:nth-child(1) {
-  transform: rotate(45deg) translateY(8px);
-}
-
-.hamburger.is-open span:nth-child(2) {
-  opacity: 0;
-}
-
-.hamburger.is-open span:nth-child(3) {
-  transform: rotate(-45deg) translateY(-8px);
-}
-@media (max-width: 600px) {
-
-  /* Show hamburger button */
-  .hamburger {
-    display: flex;
-  }
-
-  /* Hide nav links by default */
-  .nav-links {
-    display: none;
-    position: absolute;
-    top: 70px;
-    right: 20px;
-    flex-direction: column;
-    background-color: #1e1e2f;
-    padding: 20px;
-    border-radius: 12px;
-    width: 60%;
-    z-index: 50;
-  }
-
-  /* When menu is open, show nav */
-  .nav-links.nav-open {
-    display: flex;
-  }
-
-  /* Increase spacing for mobile */
-  .nav-links a {
-    padding: 10px 0;
-    color: white;
-  }
-}
-/* ================ TABLET LAYOUT (max-width: 900px) ================ */
+/* TABLET LAYOUT */
 @media (max-width: 900px) {
   .top-nav {
     gap: 12px;
@@ -525,15 +425,15 @@ footer {
   }
 }
 
-/* === HOME VIDEO FULLSCREEN === */
+/* === HOME Page VIDEO CSS === */
+
 .home-landing {
   position: relative;
   width: 100vw;
-  height: 100vh;   /* full screen */
+  height: 100vh; /* full screen */
   overflow: hidden;
 }
 
-/* video fills screen */
 .home-video {
   position: absolute;
   top: 50%;
@@ -547,7 +447,6 @@ footer {
   z-index: 1;
 }
 
-/* overlay (dark layer + text) */
 .home-overlay {
   position: absolute;
   top: 0;
