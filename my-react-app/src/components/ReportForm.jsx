@@ -9,11 +9,24 @@ export default function ReportForm({ onAddIncident }) {
   const [details, setDetails] = useState("");      // comment box
   const [error, setError] = useState("");
 
+  //Date limits today to 1 month back
+  const today = new Date();
+  const maxDate = today.toISOString().split("T")[0];
+
+  const minDateObj = new Date();
+  minDateObj.setDate(minDateObj.getDate() - 6);
+  const minDate = minDateObj.toISOString().split("T")[0];
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
     if (!title.trim()) {
       setError("Please enter what happened (incident type).");
+      return;
+    }
+
+    if (!date || !time) {
+      setError("Please provide both date and time of the incident.");
       return;
     }
 
@@ -93,6 +106,9 @@ export default function ReportForm({ onAddIncident }) {
             type="date"
             value={date}
             onChange={(e) => setDate(e.target.value)}
+            min={minDate}
+            max={maxDate}
+            required
           />
         </label>
 
@@ -102,6 +118,7 @@ export default function ReportForm({ onAddIncident }) {
             type="time"
             value={time}
             onChange={(e) => setTime(e.target.value)}
+            required
           />
         </label>
       </div>
@@ -118,9 +135,13 @@ export default function ReportForm({ onAddIncident }) {
 
       {error && <p className="error-text">{error}</p>}
 
-      <button type="submit" className="submit-btn">
-        Submit report
-      </button>
+      <button
+  type="submit"
+  className="submit-btn"
+  disabled={!title.trim() || !date || !time}
+>
+  Submit report
+</button>
     </form>
   );
 }
