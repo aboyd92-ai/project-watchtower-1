@@ -13,7 +13,7 @@ function App() {
   
   const sampleIncidents = seedData;
 
-  // 👉 2) User-submitted reports: used ONLY on Report page
+  
   const [reports, setReports] = useState([]);
 
   

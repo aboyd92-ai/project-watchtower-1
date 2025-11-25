@@ -9,13 +9,12 @@ export default function ReportForm({ onAddIncident }) {
   const [details, setDetails] = useState("");      // comment box
   const [error, setError] = useState("");
 
-  //Date limits today to 1 month back
-  const today = new Date();
-  const maxDate = today.toISOString().split("T")[0];
+    const today = new Date(); 
+  const maxDate = today.toISOString().split("T")[0]; 
 
   const minDateObj = new Date();
-  minDateObj.setDate(minDateObj.getDate() - 6);
-  const minDate = minDateObj.toISOString().split("T")[0];
+  minDateObj.setDate(minDateObj.getDate() - 6); 
+  const minDate = minDateObj.toISOString().split("T")[0]; 
 
   const handleSubmit = (e) => {
     e.preventDefault();

@@ -10,7 +10,7 @@ export default function AlertCard({ incident }) {
       ? "severity-low"
       : "";
 
-  // Icon for severity
+  // Icons for severity
   const icon =
     incident.severity === "High"
       ? "\u{1F6A8}" // 🚨
